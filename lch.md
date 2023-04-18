@@ -7,7 +7,7 @@
 
 
 1. 123
-![图片alt](src\355140.png "图片title")
+![图片alt](./src/355140.png "图片title")
 
 
 
