@@ -1,3 +1,5 @@
 *.pdf
 *.html
 test.md
+*.md
+!README.md
