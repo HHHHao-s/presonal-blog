@@ -1,4 +1,332 @@
-# 问题
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400;1,500;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  --head: 'Microsoft Yahei';
+  --body: 'Microsoft Yahei', sans-serif;
+  --mono: 'Microsoft Yahei';
+  font-family: var(--body);
+  font-size: 12pt;
+
+  --offwhite: #fcf5e5;
+  --green: #e0e5c1;
+  --yellow: #c9ad6a;
+  --red: #822000;
+  --purple: #704cd9;
+}
+
+/** Background **/
+
+content, .typora-export-content {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  background-image: url("torillic/torillic-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+.typora-export-content {
+  top: 0;
+}
+content:after, .typora-export-content:after {
+  content: "Background: Dmitry Demidov via Pexels [#3843969]";
+  position: fixed;
+  bottom: 1cm;
+  left: 0;
+  width: 6.5cm;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  z-index: -1;
+  font-size: 8pt;
+  padding: 2mm 3mm;
+  border-radius: 0 2mm 2mm 0;
+}
+
+/** Page **/
+#write, #typora-source {
+  position: relative;
+  margin: 4rem auto;
+  width: 21cm;
+  min-height: 80vh;
+  padding: 2cm;
+  overflow-y: hidden;
+  box-shadow:
+    inset 0cm -0cm 0.1cm 0.05cm rgba(0, 0, 0, 0.1),
+    1cm 1cm 1cm 1cm rgba(0, 0, 0, 0.5);
+  transform-style: preserve-3d;
+  background-image: url("https://www.dndbeyond.com/content/1-0-1895-0/skins/waterdeep/images/mon-summary/paper-texture.png");
+  background-color: var(--offwhite);
+  /* Add columns */
+  column-count: 2;
+  column-gap: 0.5cm;
+  column-width: 8cm;
+}
+#typora-source {
+  font-family: var(--mono) !important;
+  column-count: 1 !important;
+  column-width: auto !important;
+}
+#write p, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write div, #write pre {
+  width: auto;
+}
+#write > *:first-child {
+  margin-block-start: 0;
+}
+.ty-on-typewriter-mode #write {
+  column-count: 1;
+  padding-bottom: 50%;
+}
+
+/** Responsivity **/
+/* Compress for small windows */
+@media only screen and (max-width: 22cm) {
+  #write, #typora-source {
+    column-count: 1;
+    width: calc(100% - 2rem);
+    margin: 1rem;
+  }
+}
+/* Hide background credit if there's no width */
+@media only screen and (max-width: 37cm) {
+  content:after, .typora-export-content:after {
+    left: -6.1cm
+  }
+}
+
+/** Export **/
+@media print {
+    content, .typora-export-content {
+      position: relative;
+      background: none;
+      overflow-y: visible;
+    }
+    content:after, .typora-export-content:after {
+      display: none;
+    }
+    #write, #typora-source {
+        min-height: 0;
+        padding: 0;
+        overflow-y: visible;
+        box-shadow: none;
+        background: none;
+    }
+}
+
+body {
+    font-family: var(--body)
+}
+
+/** Headings **/
+
+/* All headings */
+h1, h2, h3, h4, h5, h6 {
+    
+  margin-block-end: 2pt;
+  margin-block-start: 1em;
+  line-height: 1em;
+  break-inside: avoid;
+  break-after: avoid;
+}
+
+/* Major headings */
+h1, h2, h3, h4 {
+  font-family: var(--head);
+  font-weight: 700;
+  font-variant: small-caps;
+  color: var(--red);
+}
+
+/* Individual headings */
+h1 {
+  font-size: 28pt;
+  column-span: all;
+}
+
+h2 {
+  font-size: 24pt;
+  column-span: all;
+}
+
+h3 {
+  font-size: 18pt;
+  margin-left: 10px;
+}
+
+h4 {
+  font-size: 14pt;
+  border-bottom: 1pt solid var(--yellow);
+  border-bottom: 1pt solid var(--yellow);
+}
+h4 a {
+  text-decoration: none;
+}
+
+h5 {
+  font-size: 12pt;
+}
+
+
+h6 {
+  font-size: 10pt;
+  font-weight: 400;
+  text-decoration: underline;
+  text-decoration-color: var(--yellow);
+}
+
+hr {
+  /* Common to all hr's */
+  border-top: 2pt solid transparent;
+  border-bottom: 2pt solid transparent;
+  border-left-style: solid;
+  border-left-color: var(--red);
+
+  /* Top-level hr (aka page delineator) */
+  column-span: all;
+  border-left-width: 16cm;
+  margin-top: 18pt;
+  margin-bottom: 36pt;
+}
+
+blockquote hr {
+  /* Within a blockquote (aka fancy underline) */
+  column-span: none;
+  border-left-width: 6cm;
+  margin-top: 2pt;
+  margin-bottom: 2pt;
+}
+
+/** Body **/
+p {
+  margin-block-start: 2pt;
+  break-inside: avoid;
+}
+
+strong {
+  color: var(--red);
+}
+
+a {
+  color: var(--text-color);
+  text-decoration-color: var(--yellow);
+}
+a:visited {
+  text-decoration-color: var(--green);
+}
+a:hover {
+  color: var(--text-color);
+  text-decoration-color: var(--purple);
+}
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+strong a {
+  color: var(--red);
+}
+
+del {
+  text-decoration-color: var(--red);
+}
+
+mark {
+  background-color: var(--green);
+}
+
+code, pre {
+  background: auto;
+  font-family: var(--mono);
+}
+
+ol, ul {
+  padding-left: 1rem;
+}
+
+li::marker {
+  font-weight: 700;
+  color: var(--red);
+}
+
+/** Tables **/
+table {
+  break-inside: avoid;
+}
+
+thead, th {
+  font-weight: 700;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: var(--green);
+}
+
+blockquote tbody tr:nth-child(odd), pre blockquote tbody tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+td, th {
+  padding: 3pt 6pt;
+}
+
+/** Blocks **/
+pre, pre.md-meta-block {
+  background-color: var(--green);
+  padding: 6pt;
+}
+
+blockquote {
+  background-color: var(--green);
+  padding: 12pt;
+  border-top: 3pt solid var(--red);
+  border-bottom: 3pt solid var(--red);
+  break-inside: avoid;
+}
+
+blockquote blockquote {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/** Images **/
+
+.md-image {
+  z-index: 0;
+}
+
+.md-image:before {
+  position: absolute;
+  top: -1.5cm;
+  left: -1.5cm;
+  right: -1.5cm;
+  bottom: -0.5cm;
+  background-image: url("torillic/splash.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
+  content: " ";
+  z-index: -1;
+}
+.on-focus-mode .md-image:before {
+  opacity: 0.2;
+}
+</style>
+
+
+# <center style="font-size: 40px">**个人博客**
+
+# **个人博客选题分析**
+
+## **选题背景**
+
+博客是一种个人的网络日记，是一种用来记录个人生活、感悟、思考和经验的网络日记。近年来，随着信息技术的进步，博客也快速发展。为人们提供了一个自由、开放、互动的交流平台。博客不仅可以帮助个人实现自我表达和展示，也可以为企业、政府、媒体等机构提供一个有效的宣传和传播渠道。沟通方式比电子邮件、讨论群组以及BBS和论坛更展现个性，博客系统已经成为广大用户发表文章言论的主要工具。个人博客可以分享自己的想法，为自己的产出引流。
+
+
+
+
+# **问题**
 这段文本描述了一个博客网站的功能和系统设计方法。以下是其中可能存在的问题：
 
 1. 游客浏览和评价功能：
@@ -30,56 +358,50 @@
 
 品牌合作：博主可以通过与品牌进行合作，为品牌提供曝光和宣传，从而获得一定的收益。
 ### **1.3 业务目标**
-BO-1：提高网站流量：通过优化博客的SEO，定期发布高质量、有价值的内容，积极推广博客，吸引更多的访问者，提高网站流量。
+提高网站流量：通过优化博客的SEO，定期发布高质量、有价值的内容，积极推广博客，吸引更多的访问者，提高网站流量。
 
-BO-2：提高用户留存率：通过提供个性化的用户体验，例如定期推送订阅邮件、社交媒体分享等方式，增强用户的参与感和忠诚度，提高用户留存率。
+提高用户留存率：通过提供个性化的用户体验，例如定期推送订阅邮件、社交媒体分享等方式，增强用户的参与感和忠诚度，提高用户留存率。
 
-BO-3：增加粉丝数量：通过各种社交媒体平台和其他渠道宣传博客，积极与读者互动，增加粉丝数量。可以通过提供独家内容、优惠福利等方式吸引更多的用户成为粉丝。
+增加粉丝数量：通过各种社交媒体平台和其他渠道宣传博客，积极与读者互动，增加粉丝数量。可以通过提供独家内容、优惠福利等方式吸引更多的用户成为粉丝。
 
-BO-4：扩大品牌影响力：通过与其他博主、品牌进行合作，参与各种行业活动和社区活动，扩大博客的品牌影响力。
+扩大品牌影响力：通过与其他博主、品牌进行合作，参与各种行业活动和社区活动，扩大博客的品牌影响力。
 
-BO-5：增加收益：通过各种方式如会员订阅、广告收入、品牌合作等，增加博客的收益。可以通过谷歌广告等广告平台、知名电商平台等方式，获取更多的收益。
+增加收益：通过各种方式如会员订阅、广告收入、品牌合作等，增加博客的收益。可以通过谷歌广告等广告平台、知名电商平台等方式，获取更多的收益。
 
 ### **1.4 成功指标**
-SM-1：在发布6个月之后，博客的流量达到每月数万或数十万的访问量，且这些访问量是有价值的。
-
-SM-2：在发布6个月之后，收益达到每月数万，收益与流量、粉丝数量匹配，即每一万流量或每一百个粉丝所产生的收益能够达到一定的目标。
+在发布6个月之后，博客的流量达到每月数千或数万的访问量，且这些访问量是有价值的。
 
 ### **1.5 愿景陈述**
 博客应具有积极的社会意义和价值，提供一个平台为读者提供有用的信息和知识，或者帮助读者解决实际问题等。也可以成为特定领域的权威博客，或者成为特定群体的首选博客等。博客的受众是博客的目标读者群体，博客的影响范围则是博客所影响的人群和领域。做到全国第一的博客
 
 ### **1.6业务风险**
-RI-1：博客的内容可能存在侵权、虚假宣传、违反社会公德等问题，导致法律风险和声誉风险。（概率=0.8；影响=4）
+博客的内容可能存在侵权、虚假宣传、违反社会公德等问题，导致法律风险和声誉风险。（概率=0.8；影响=4）
 
-RI-2：博客的流量可能受到搜索引擎算法变化、社交媒体政策调整等因素的影响，导致流量的急剧下降。（概率=0.4；影响=3）
+博客的流量可能受到搜索引擎算法变化、社交媒体政策调整等因素的影响，导致流量的急剧下降。（概率=0.4；影响=3）
 
-RI-3：博客所在的行业和领域可能存在激烈的竞争，其他博客可能通过价格战、品牌宣传等手段抢占市场份额。（概率=0.6；影响=5）
+博客所在的行业和领域可能存在激烈的竞争，其他博客可能通过价格战、品牌宣传等手段抢占市场份额。（概率=0.6；影响=5）
 
-RI-4：博客所处的政策环境可能发生变化，例如出台新的网络安全法规、版权法规等，导致博客需要承担额外的合规成本和责任。（概率=0.2；影响=2）
+博客所处的政策环境可能发生变化，例如出台新的网络安全法规、版权法规等，导致博客需要承担额外的合规成本和责任。（概率=0.2；影响=2）
 
 ### **1.7 业务假设和依赖**
-AS-1：系统为用户们提供了个性化的用户界面，用户可以根据个性需求装扮界面。
+系统为用户们提供了个性化的用户界面，用户可以根据个性需求装扮界面。
 
-AS-2：服务器可以承受上千人的访问量，并且检测博客是否合规并上传的时间控制在30分钟以内。
+服务器可以承受上千人的访问量，并且检测博客是否合规并上传的时间控制在30分钟以内。
 
 ## **2.范围和限制**
 ### **2.1主要特性**
-FE-1：发表，修改，取消或删除和查看已经发表的博客。
+发表，修改，取消或删除和查看已经发表的博客。
 
-FE-2：审核和删除发表的博客。
+审核和删除发表的博客。
 
-FE-3：为经常访问的博客进行博客订阅，删除和取消。
+为经常访问的博客进行博客订阅，删除和取消。
 
-FE-4：授权员工管理员可通过企业内网，互联网，智能手机以及平板电脑访问系统。
+授权员工管理员可通过企业内网，互联网，智能手机以及平板电脑访问系统。
 
-FE-5：可查阅博客的订阅数量
+可查阅博客的订阅数量
 
 ![](./src/%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B1%80%E9%83%A8%E7%89%B9%E6%80%A7%E6%A0%91.png)
-### **2.2初始与后序发布的范围**
-<!--以后填写-->
 
-### **2.3限制项和排除项**
-无
 
 ## **3.业务上下文**
 
